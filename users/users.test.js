@@ -1,4 +1,4 @@
-describe('authentication router', () => {
+describe('users router', () => {
     it('should run the tests', () => {
         expect(true).toBe(true)
     })
