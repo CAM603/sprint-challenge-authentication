@@ -39,12 +39,19 @@ Commit your code regularly and use descriptive messages. This helps both you (in
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] What is the purpose of using _sessions_?
+    - Sessisons provide a way to to persist data across multiple requests, usually used to save authentication information so a user does not need to sign in after every new request to a restricted endpoint
 
 - [ ] What does bcrypt do to help us store passwords in a secure manner.
+    - Bcrypt has functions to hash passwords as well as read the hashed passwords. When users register with a password, bcrypt stores the it as a hash rather than plain text. When logging in, bcrypt uses the compareSyncy() function to compare plain text (provided by the client) to the password hash from the database. The function first hashes the plain text and then compares the two hashes to validate the user.
 
 - [ ] What does bcrypt do to slow down attackers?
+    - Bcrypt uses a key derivation function to hash the password for multiple rounds. Doing so requires an attacker to not only know the hash but to also know the algorithm used and how many rounds were used to generate the hash. This increases the amount of time it takes and will hopefully ward off attackers
 
 - [ ] What are the three parts of the JSON Web Token?
+    - The header :  contains the algorithm with the token type.
+    - The payload : contains information to store in the token
+    - The signature : encoding the header and payload together, and then signing it with a secret
+
 
 ## Minimum Viable Product
 
