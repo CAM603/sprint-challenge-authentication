@@ -1,6 +1,7 @@
 const request = require('supertest');
 const server = require('../api/server');
 const db = require('../database/dbConfig');
+const Users = require('../users/users-model')
 
 describe('authentication router', () => {
     it('should run the tests', () => {
@@ -13,7 +14,7 @@ describe('authentication router', () => {
         it('returns 201 created', async () => {
             const res = await request(server)
                 .post('/api/auth/register')
-                .send({username: 'cam', password: 'cam'})
+                .send({username: 'sam', password: 'sam'})
             
             expect(res.status).toBe(201)
         })
@@ -41,13 +42,13 @@ describe('authentication router', () => {
         it('provides a token', async () => {
             await request(server)
                 .post('/api/auth/register')
-                .send({username: 'cam', password: 'cam'})
+                .send({username: 'mac', password: 'mac'})
             
-            let res = await request(server)
+            let result = await request(server)
                 .post('/api/auth/login')
-                .send({username: 'cam', password: 'cam'})
+                .send({username: 'mac', password: 'mac'})
             
-            expect(res.text.token).toBeTruthy()
+            expect(result.body.token).toBeTruthy()
         })
     })
 })
