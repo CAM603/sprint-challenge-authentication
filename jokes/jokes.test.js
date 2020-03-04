@@ -2,6 +2,8 @@ const request = require('supertest');
 const server = require('../api/server');
 const db = require('../database/dbConfig');
 
+let token;
+
 describe('jokes router', () => {
     it('should run the tests', () => {
         expect(true).toBe(true)
@@ -26,13 +28,16 @@ describe('jokes router', () => {
         await request(server)
                 .post('/api/auth/register')
                 .send({username: 'cam', password: 'cam'})
-            
-        await request(server)
+
+                
+        const res1 = await request(server)
                 .post('/api/auth/login')
                 .send({username: 'cam', password: 'cam'})
-        
-        const res = await request(server).get('/api/jokes').set('Authorization', `token`)
+                
+        token = res1.body.token;
+                
+        const res2 = await request(server).get('/api/jokes').set('Authorization', token)
 
-        console.log(res.body)
+        expect(res2.status).toBe(200)
     })
 })
